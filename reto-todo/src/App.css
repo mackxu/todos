@@ -1,0 +1,25 @@
+.app {
+  width: 25vw;
+  margin: 100px auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+header ul {
+  width: 8vw;
+}
+
+.add-todo {
+  margin-bottom: 12px;
+}
+
+.todo {
+  margin-bottom: 8px;
+}
+
