@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, KeyboardEvent } from 'react'
+import React, { ChangeEvent, useState, KeyboardEvent, FC } from 'react'
 import './App.css'
 import { Provider, useStore } from 'reto'
 import { ITodo, getId, FilterType } from './util'
@@ -6,19 +6,23 @@ import TodoList from './store/TodoList'
 import FilterStore from './store/FilterStore'
 import FilteredTodoList from './store/FilteredTodoList'
 
-function TodoItem({ item }: { item: ITodo }) {
+type TodoItemProps = {
+  todo: ITodo
+}
+
+const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const todos = useStore(TodoList)
-  const idx = todos.todoList.findIndex(todoItem => todoItem === item)
+  const idx = todos.todoList.findIndex(todoItem => todoItem === todo)
   return (
     <div className="todo">
       <input
         type="checkbox"
-        checked={ item.isComplete }
-        onChange={ (ev) => todos.toggleItemCompletion(idx) }
+        checked={ todo.isComplete }
+        onChange={ () => todos.toggleItemCompletion(idx) }
       />
       <input
         type="text"
-        value={ item.text }
+        value={ todo.text }
         onChange={ (ev) => todos.editItemText(idx, ev.target.value) }
         autoComplete="off"
       />
@@ -112,7 +116,7 @@ function Todos() {
         todos.map(todo => (
           <TodoItem
             key={ todo.id }
-            item={ todo }
+            todo={ todo }
           ></TodoItem>
         ))
       }
